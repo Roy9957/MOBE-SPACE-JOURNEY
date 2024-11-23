@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOBE SPACE JOURNEY</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="menu-toggle" id="menuToggle">
+        <span id="menuIcon">≡</span>
+    </div>
+    <nav id="sidebarMenu">
+        <ul>
+            <li data-section="home">Home</li>
+            <li data-section="about">About</li>
+            <li data-section="services">Services</li>
+            <li data-section="contact">Contact</li>
+            
+      </ul>
+      
+    <style>
+
+        /* Fullscreen background overlay */
+        .progress-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        /* Modern progress bar container */
+        .progress-bar-container {
+            width: 70%;
+            background-color: #FFD700;
+            border-radius: 25px;
+            height: 30px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated progress bar with water effect */
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, #0025FF, #FF0000);
+            border-radius: 25px;
+            width: 0%;
+            position: relative;
+            animation: waterEffect 2s infinite linear;
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.7);
+        }
+
+        /* Water flow effect */
+        @keyframes waterEffect {
+            0% {
+                background-position: -200% 0;
+            }
+            100% {
+                background-position: 200% 0;
+            }
+        }
+
+        /* Progress number styling */
+        .progress-number {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            z-index: 1;
+        }
+
+        /* Button styling */
+        .link-button {
+            font-size: 10px;
+            margin-left:70px;
+            font-weight: bold;
+            padding: 2px 15px;
+            background-color: #554B4A;
+            color: white;
+            border: 2px solid #001FFF;
+            border-radius: 4px;
+           
+            transition: background-color 0.3s ease;
+        }
+
+        .link-button:hover {
+            background-color: #FF0000;
+        }
+
+        /* Blast effect */
+        .blast {
+            animation: blastAnimation 1s ease-out forwards;
+        }
+
+        /* Blast animation */
+        @keyframes blastAnimation {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0;
+            }
+        }
+
+    </style>
+
+    <!-- Button to trigger progress -->
+    <button class="link-button" id="redirectButton">Game website</button>
+
+    <!-- Fullscreen progress overlay -->
+    <div class="progress-overlay" id="progressOverlay">
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progressBar"></div>
+            <div class="progress-number" id="progressNumber"></div>
+        </div>
+    </div>
+
+    <script>
+        const button = document.getElementById('redirectButton');
+        const progressOverlay = document.getElementById('progressOverlay');
+        const progressBar = document.getElementById('progressBar');
+        const progressNumber = document.getElementById('progressNumber');
+
+        button.addEventListener('click', function() {
+            // Apply the blast effect to the button
+            button.classList.add('blast');
+
+            // Show the progress overlay
+            progressOverlay.style.display = 'flex';
+            progressOverlay.style.opacity = '1';
+
+            let progress = 0;
+            // Update the progress every 30ms until it reaches 100%
+            let interval = setInterval(function() {
+                if (progress >= 100) {
+                    clearInterval(interval); // Stop the interval when progress reaches 100%
+                    // Redirect after a small delay
+                    setTimeout(function() {
+                        window.location.href = 'https://roy9957.github.io/MOBE-GAME/'; // Your game link
+                    }, 500); // 0.5 second delay after progress is complete
+                } else {
+                    progress++;
+                    progressBar.style.width = progress + '%'; // Update the width of progress bar
+                    progressNumber.textContent = progress + '%'; // Update the progress number
+                }
+            }, 30); // Smooth animation for progress
+        });
+    </script>
+
+
+        
+        
+  
+        
+    </nav>
+   
+    <main>
+        <section id="home" class="section active">
+        
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+            text-align: center;
+        }
+
+        /* Header Banner */
+        .banner {
+            background: linear-gradient(45deg, #2a2a72, #009ffd);
+            color: #fff;
+            padding: 50px 20px;
+        }
+        .banner h1 {
+            margin: 0;
+            font-size: 3em;
+            letter-spacing: 2px;
+        }
+        .banner p {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 40px 20px;
+            margin: 20px auto;
+            max-width: 800px;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .section h2 {
+            color: #2a2a72;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .section p {
+            font-size: 1em;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 20px;
+            padding: 10px;
+            background: #2a2a72;
+            color: #fff;
+            font-size: 0.9em;
+        }
+    </style>
+    <!-- Banner Section -->
+    
+        
+        <img style="height: 200px;" src="8.gif" alt="About mobe">
+       
+    
+
+  
+ 
+        <h2>About MOBE GAME</h2>
+        <p>MOBE GAME is your gateway to the most thrilling and immersive gaming world. Dive into exciting adventures, competitive battles, and a universe filled with limitless possibilities. Whether you’re a casual player or a hardcore gamer, MOBE GAME has something for everyone.</p>
+     <h2>Features</h2>
+        <p>✨ Immersive Gameplay: Stunning visuals and engaging storylines.</p>
+        <p>✨ Multiplayer Modes: Compete with friends or global players.</p>
+        <p>✨ Regular Updates: Fresh content to keep you hooked.</p>
+        <p>✨ Easy Accessibility: Play anytime, anywhere with ease.</p>
+      <p>✨ If you need more information,Go to contact page and tap the Discord icon to get more information.</p>
+
+    <video style="height: 200px" autoplay loop muted>
+        <source src="e.mp4" type="video/mp4">
+         </video>
+
+  
+    
+   </section>
+        <section id="about" class="section">
+
+    <!-- Banner Section -->
+    
+     <img style="height: 200px;" src="128.gif" alt="About mobe">
+       
+   
+
+    <!-- About Section -->
+   
+        <h2>Who We Are</h2>
+        <p>MOBE GAME is a revolutionary gaming platform dedicated to bringing the ultimate gaming experience to players worldwide. With cutting-edge technology and innovative designs, we aim to redefine how you play and interact with games.</p>
+    
+
+    <!-- Mission Section -->
+   
+        <h2>Our Mission</h2>
+        <p>Our mission is to create a gaming environment that is inclusive, engaging, and endlessly entertaining. We believe in the power of games to bring people together and inspire creativity in every player.</p>
+ 
+
+    <!-- Vision Section -->
+    
+        <h2>Our Vision</h2>
+        <p>We envision a future where gaming becomes a universal language, connecting players from all walks of life. At MOBE GAME, we are committed to pushing boundaries and delivering unparalleled gaming experiences.</p>
+   
+   
+          
+          
+          
+        </section>
+        <section id="services" class="section">
+  <style>
+  
+
+        /* Services Section */
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 40px 20px;
+        }
+        .service-card {
+            background: #fff;
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .service-card h3 {
+            margin: 15px;
+            font-size: 1.5em;
+            color: #3498db;
+        }
+        
+               a {
+    cursor: default; /* Default cursor for links */
+    text-decoration: none; /* Optional: Removes underline */
+}
+        
+        .service-card p {
+            margin: 15px;
+            font-size: 1em;
+            line-height: 1.6;
+        }
+
+    
+    </style>
+
+    <!-- Banner Section -->
+    <img style="height: 200px;" src="7.gif" alt="About mobe">
+       
+
+    <!-- Services Section -->
+    <div class="services">
+        <!-- Service 1 -->
+        <div class="service-card">
+            <img src="d.png" alt="Immersive Gameplay">
+            <h3>Immersive Gameplay</h3>
+            <p>Experience stunning graphics and interactive environments designed to keep you engaged and entertained for hours.</p>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="service-card">
+            <img src="a.gif" alt="Multiplayer Battles">
+            <h3>Multiplayer Battles</h3>
+            <p>Join exciting multiplayer battles with friends or global players, and showcase your skills on the leaderboard.</p>
+        </div>
+
+      <a href="https://discord.gg/6VYVsf87AF"> <!-- Service 3 -->
+        <div class="service-card">
+            <img src="m.gif" alt="Regular Updates">
+            <h3>Regular Updates</h3>
+            <h2>404</h2><strong>NOT FOUND.</strong><p>JOIN our DISCORD server</p>
+        </div>
+      </a>
+        <!-- Service 4 -->
+        <div class="service-card">
+            <img src="h.gif" alt="Easy Accessibility">
+            <h3>Easy Accessibility</h3>
+            <p>Play anytime, anywhere on any device. MOBE GAME is designed for ultimate convenience and fun.</p>
+        </div>
+    </div>
+
+    
+          
+          
+          
+        </section>
+        <section id="contact" class="section">
+    <style>
+      
+
+    
+    </style>
+    <!-- Banner Section -->
+    <img style="height: 200px;width: 350px;" src="z.png" alt="About mobe">
+       
+<h5>JOIN OUR DISCORD SERVER</h5>
+    <!-- Contact Section -->
+    <div class="contact-section">
+
+               <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .discord-icon {
+            font-size: 36px;
+            color: #5260F8; /* Discord's primary color */
+            text-decoration: none;
+           
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+        a {
+    cursor: default; /* Default cursor for links */
+    text-decoration: none; /* Optional: Removes underline */
+}
+
+        .discord-icon:hover {
+            color: #FF0000; /* Darker Discord color */
+            transform: scale(1.1);
+        }
+    </style>
+
+    <!-- Discord Icon -->
+    <a href="https://discord.gg/6VYVsf87AF" class="discord-icon" target="_blank">
+        <i class="fab fa-discord"></i>
+    </a> 
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .android-icon {
+            font-size: 28px; /* ছোট সাইজ */
+            color: #393D3F; /* আপনার পছন্দের রঙ */
+            transition: transform 1.5s ease;
+            animation: heartbeat 1.5s infinite; /* Heartbeat animation */
+        }
+
+        /* Heartbeat effect */
+        @keyframes heartbeat {
+            0% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(1.1);
+                color: #FF0000;/* ছোট সময়ের জন্য বড় হবে */
+            }
+            50% {
+                transform: scale(1);
+                color: #0B00FF;/* আবার স্বাভাবিক হবে */
+            }
+            75% {
+                transform: scale(1.1);
+                color: #FFFC00;
+            }
+            100% {
+                transform: scale(1); /* আবার স্বাভাবিক হবে */
+            }
+        }
+
+        .android-icon:hover {
+            transform: scale(1.2); /* হোভার করলে সাইজ বাড়ানো */
+        }
+    </style>
+
+    <a href="https://www.webintoapp.com/download/apk/494183/app-release.apk">
+        <i class="fab fa-android android-icon"></i>
+    </a><br>
+  
+
+
+
+
+    </div>
+
+    </section>
+        
+        
+        <footer>
+        &copy; 2024 MOBE GAME. All Rights Reserved.
+    </footer>
+ 
+        
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
