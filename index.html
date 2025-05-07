@@ -4,16 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MOBE SPACE JOURNEY</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #FF0000;
-            --secondary: #0025FF;
+            --primary: #FF3366;
+            --secondary: #338AFF;
             --dark: #0A0A2A;
+            --darker: #050515;
             --light: #FFFFFF;
+            --lighter: rgba(255, 255, 255, 0.9);
             --accent: #FFD700;
+            --accent-dark: #FFAA00;
             --space-gradient: linear-gradient(135deg, #000428, #004e92);
+            --space-gradient-2: linear-gradient(135deg, #1a0033, #330066);
+            --neon-glow: 0 0 10px rgba(255, 51, 102, 0.7), 0 0 20px rgba(51, 138, 255, 0.5);
+            --transition-fast: all 0.2s cubic-bezier(0.65, 0, 0.35, 1);
+            --transition-medium: all 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+            --transition-slow: all 0.6s cubic-bezier(0.65, 0, 0.35, 1);
         }
         
         * {
@@ -22,17 +30,35 @@
             box-sizing: border-box;
         }
         
+        html {
+            scroll-behavior: smooth;
+            overscroll-behavior: none;
+        }
+        
         body {
             font-family: 'Montserrat', sans-serif;
-            background: var(--dark);
+            background: var(--darker);
+            cursor: not-allowed;
             color: var(--light);
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(255, 0, 0, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(0, 37, 255, 0.1) 0%, transparent 20%);
+                radial-gradient(circle at 10% 20%, rgba(255, 51, 102, 0.15) 0%, transparent 25%),
+                radial-gradient(circle at 90% 80%, rgba(51, 138, 255, 0.15) 0%, transparent 25%);
+            background-attachment: fixed;
+            line-height: 1.6;
+            font-weight: 400;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         
-        /* Cosmic Header Effect */
+        /* Smooth Scroll Container */
+        .smooth-scroll {
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        /* Cosmic Pulse Animation */
         @keyframes cosmicPulse {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -53,22 +79,25 @@
             align-items: center;
             cursor: pointer;
             z-index: 1000;
-            box-shadow: 0 0 20px var(--primary), 
-                        0 0 40px rgba(255, 0, 0, 0.3);
-            transition: all 0.3s ease;
+            box-shadow: var(--neon-glow);
+            transition: var(--transition-medium);
+            will-change: transform;
+            border: none;
+            outline: none;
         }
         
         .menu-toggle:hover {
             transform: rotate(90deg) scale(1.1);
             box-shadow: 0 0 30px var(--primary), 
                         0 0 60px rgba(255, 0, 0, 0.5);
+            background: var(--accent);
         }
         
         .menu-toggle span {
             font-size: 30px;
             font-weight: bold;
             color: white;
-            transition: all 0.3s ease;
+            transition: var(--transition-medium);
         }
         
         /* Galactic Sidebar */
@@ -78,13 +107,15 @@
             left: -350px;
             width: 300px;
             height: 100%;
-            background: rgba(10, 10, 42, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 5px 0 30px rgba(0, 0, 0, 0.5);
-            padding: 80px 30px;
-            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            background: rgba(10, 10, 42, 0.98);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 5px 0 50px rgba(0, 0, 0, 0.7);
+            padding: 100px 30px 30px;
+            transition: var(--transition-slow);
             z-index: 999;
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            border-right: 1px solid rgba(255, 255, 255, 0.15);
+            will-change: transform;
         }
         
         #sidebarMenu.active {
@@ -98,14 +129,16 @@
         
         #sidebarMenu ul li {
             margin: 25px 0;
-            padding: 15px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
+            padding: 18px 25px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition-medium);
             position: relative;
             overflow: hidden;
-            border-left: 3px solid var(--primary);
+            border-left: 4px solid var(--primary);
+            will-change: transform;
+            backdrop-filter: blur(5px);
         }
         
         #sidebarMenu ul li::before {
@@ -115,14 +148,14 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.2), transparent);
-            transition: all 0.5s ease;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+            transition: var(--transition-slow);
         }
         
         #sidebarMenu ul li:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
             transform: translateX(10px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
         }
         
         #sidebarMenu ul li:hover::before {
@@ -130,14 +163,16 @@
         }
         
         #sidebarMenu ul li i {
-            margin-right: 10px;
+            margin-right: 12px;
             color: var(--accent);
+            font-size: 1.1rem;
         }
         
         /* Main Content */
         main {
             padding: 20px;
-            transition: all 0.3s ease;
+            transition: var(--transition-medium);
+            will-change: filter;
         }
         
         main.blur {
@@ -148,40 +183,45 @@
             display: none;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 40px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transform: translateY(20px);
+            padding: 50px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transform: translateY(30px);
             opacity: 0;
-            transition: all 0.5s ease;
+            transition: var(--transition-slow);
+            will-change: transform, opacity;
         }
         
         .section.active {
             display: block;
             transform: translateY(0);
             opacity: 1;
-            animation: fadeIn 0.8s ease forwards;
+            animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
         /* Home Section */
         .hero-banner {
             position: relative;
-            height: 400px;
-            border-radius: 15px;
+            height: 500px;
+            border-radius: 20px;
             overflow: hidden;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--space-gradient);
+            background: var(--space-gradient-2);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            transform-style: preserve-3d;
+            perspective: 1000px;
         }
         
         .hero-banner::before {
@@ -192,56 +232,83 @@
             width: 100%;
             height: 100%;
             background: url('https://media.giphy.com/media/3o7TKUM3IgJBX2as9O/giphy.gif') center/cover;
-            opacity: 0.3;
+            opacity: 0.4;
+            animation: cosmicPulse 15s infinite alternate;
+        }
+        
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, var(--darker), transparent);
+            z-index: 1;
         }
         
         .hero-content {
             position: relative;
-            z-index: 1;
+            z-index: 2;
             text-align: center;
-            padding: 20px;
+            padding: 30px;
+            transform: translateZ(50px);
         }
         
         .hero-content h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 3.5rem;
-            margin-bottom: 20px;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: 25px;
             background: linear-gradient(to right, var(--accent), var(--primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
             letter-spacing: 3px;
+            font-weight: 900;
+            line-height: 1.2;
+            animation: textGlow 3s infinite alternate;
+        }
+        
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
+            100% { text-shadow: 0 0 20px rgba(255, 51, 102, 0.5); }
         }
         
         .hero-content p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 30px;
-            line-height: 1.6;
+            font-size: clamp(1rem, 1.5vw, 1.3rem);
+            max-width: 800px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+            color: var(--lighter);
+            font-weight: 300;
         }
         
         /* Feature Cards */
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
+            margin-top: 50px;
         }
         
         .feature-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 30px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 40px 30px;
+            transition: var(--transition-medium);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             position: relative;
             overflow: hidden;
+            will-change: transform;
+            transform-style: preserve-3d;
+            perspective: 1000px;
         }
         
         .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 215, 0, 0.3);
         }
         
         .feature-card::after {
@@ -250,27 +317,41 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
+            height: 6px;
             background: linear-gradient(to right, var(--primary), var(--secondary));
         }
         
         .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
+            font-size: 2.8rem;
+            margin-bottom: 25px;
             color: var(--accent);
+            transition: var(--transition-medium);
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.2) rotate(10deg);
+            color: var(--primary);
         }
         
         .feature-card h3 {
             font-family: 'Orbitron', sans-serif;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             color: var(--accent);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            line-height: 1.7;
         }
         
         /* About Section */
         .about-content {
             display: flex;
             flex-wrap: wrap;
-            gap: 40px;
+            gap: 50px;
             align-items: center;
         }
         
@@ -279,81 +360,122 @@
             min-width: 300px;
         }
         
+        .about-text h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            color: var(--accent);
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
         .about-image {
             flex: 1;
             min-width: 300px;
-            height: 400px;
-            border-radius: 15px;
+            height: 450px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             position: relative;
+            transform-style: preserve-3d;
         }
         
         .about-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform;
         }
         
         .about-image:hover img {
-            transform: scale(1.05);
+            transform: scale(1.08) rotate(1deg);
         }
         
         /* Services Section */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+            margin-top: 50px;
         }
         
         .service-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
             overflow: hidden;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition-medium);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             position: relative;
+            will-change: transform;
+            transform-style: preserve-3d;
         }
         
         .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 215, 0, 0.3);
         }
         
         .service-image {
-            height: 200px;
+            height: 220px;
             overflow: hidden;
+            position: relative;
+        }
+        
+        .service-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.7));
+            z-index: 1;
         }
         
         .service-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform;
         }
         
         .service-card:hover .service-image img {
-            transform: scale(1.1);
+            transform: scale(1.15) rotate(1deg);
         }
         
         .service-content {
-            padding: 25px;
+            padding: 30px;
         }
         
         .service-content h3 {
             font-family: 'Orbitron', sans-serif;
             margin-bottom: 15px;
             color: var(--accent);
+            font-size: 1.5rem;
+        }
+        
+        .service-content p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
         }
         
         /* Contact Section */
         .contact-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 40px;
-            margin-top: 40px;
+            gap: 50px;
+            margin-top: 50px;
         }
         
         .contact-info {
@@ -361,37 +483,83 @@
             min-width: 300px;
         }
         
+        .contact-info h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--accent);
+        }
+        
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+        
+        .contact-info i {
+            margin-right: 15px;
+            color: var(--accent);
+            font-size: 1.2rem;
+            min-width: 25px;
+        }
+        
         .contact-form {
             flex: 1;
             min-width: 300px;
         }
         
-        .social-links {
-            display: flex;
-            gap: 30px;
-            margin-top: 30px;
+        .contact-form h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--accent);
         }
         
+        .social-links {
+            display: flex;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        a{
+            text-decoration: none;
+            cursor: not-allowed;
+        }
         .social-link {
-            width: 60px;
-            height: 40px;
-            border-radius: 100%;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             background: rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
             color: white;
-            transition: all 0.3s ease;
+            transition: var(--transition-medium);
+            will-change: transform;
+            position: relative;
+            overflow: hidden;
         }
-        a{
-          cursor: not-allowed;
-          text-decoration: none;
+        
+        .social-link::before {
+            content: '';
+            
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: var(--transition-slow);
         }
         
         .social-link:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transform: translateY(-8px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .social-link:hover::before {
+            left: 100%;
         }
         
         .social-link.discord {
@@ -407,48 +575,83 @@
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            position: relative;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             color: var(--accent);
+            font-weight: 500;
         }
         
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 12px 15px;
+            padding: 15px 20px;
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
+            border-radius: 12px;
             color: white;
             font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition-fast);
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
         }
         
         .form-group textarea {
-            min-height: 120px;
+            min-height: 150px;
             resize: vertical;
         }
         
         .submit-btn {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
             color: white;
             border: none;
-            padding: 12px 30px;
-            border-radius: 30px;
+            padding: 16px 40px;
+            border-radius: 50px;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            letter-spacing: 1.5px;
+            transition: var(--transition-medium);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+            will-change: transform;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
         
         .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+        }
+        
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: var(--transition-slow);
+        }
+        
+        .submit-btn:hover::before {
+            left: 100%;
         }
         
         /* Progress Overlay */
@@ -458,13 +661,15 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 9999;
             opacity: 0;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
         
         .progress-overlay.active {
@@ -476,36 +681,42 @@
             width: 70%;
             max-width: 600px;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 0 50px rgba(255, 51, 102, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             text-align: center;
+            transform-style: preserve-3d;
+            perspective: 1000px;
         }
         
         .progress-title {
             font-family: 'Orbitron', sans-serif;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             color: var(--accent);
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
         }
         
         .progress-bar-container {
             width: 100%;
-            height: 20px;
+            height: 25px;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
-            margin-bottom: 15px;
+            margin-bottom: 25px;
+            position: relative;
         }
         
         .progress-bar {
             height: 100%;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             width: 0%;
-            border-radius: 10px;
+            border-radius: 15px;
             position: relative;
-            transition: width 0.3s ease;
+            transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: width;
         }
         
         .progress-bar::after {
@@ -517,7 +728,7 @@
             bottom: 0;
             background: linear-gradient(90deg, 
                           transparent, 
-                          rgba(255, 255, 255, 0.4), 
+                          rgba(255, 255, 255, 0.5), 
                           transparent);
             animation: shine 2s infinite;
         }
@@ -529,17 +740,20 @@
         
         .progress-number {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             color: var(--accent);
+            margin-bottom: 20px;
         }
         
         /* Footer */
         footer {
             text-align: center;
-            padding: 30px;
-            margin-top: 60px;
-            background: rgba(0, 0, 0, 0.3);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 50px 30px;
+            margin-top: 80px;
+            background: rgba(0, 0, 0, 0.4);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
         
         .footer-content {
@@ -550,43 +764,376 @@
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin: 20px 0;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
         }
         
         .footer-link {
             color: var(--accent);
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: var(--transition-fast);
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition-medium);
         }
         
         .footer-link:hover {
             color: var(--primary);
         }
         
+        .footer-link:hover::after {
+            width: 100%;
+        }
+        
         .copyright {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             opacity: 0.7;
+            margin-top: 20px;
+        }
+        
+        /* Particle Background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: float linear infinite;
+            will-change: transform, opacity;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 0.6; }
+            100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
+        }
+        
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--accent);
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            z-index: 100;
+            opacity: 0.8;
+            transition: var(--transition-fast);
+            will-change: transform;
+        }
+        
+        .scroll-indicator:hover {
+            opacity: 1;
+            color: var(--primary);
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-25px) translateX(-50%); }
+            60% { transform: translateY(-12px) translateX(-50%); }
+        }
+        
+        /* Game Button */
+        .game-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 18px 45px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            
+            transition: var(--transition-medium);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            display: none;
+            overflow: hidden;
+            will-change: transform;
+            font-size: 1.1rem;
+            border: none;
+            cursor: not-allowed;
+        }
+        
+        .game-button:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+        }
+        
+        .game-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: var(--transition-slow);
+        }
+        
+        .game-button:hover::before {
+            left: 100%;
+        }
+        
+        /* Floating Stars */
+        .floating-star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 4s infinite ease-in-out;
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.5); }
+        }
+        
+        /* Video Container */
+        .video-container {
+            margin-top: 70px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            transform: translateZ(0);
+            position: relative;
+        }
+        
+        .video-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 70%, rgba(0, 0, 0, 0.7));
+            z-index: 1;
+        }
+        
+        .video-container video {
+            width: 100%;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .video-container:hover video {
+            transform: scale(1.02);
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            border-left: 3px solid var(--primary);
+            margin-top: 40px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+        }
+        
+        .timeline-icon {
+            position: absolute;
+            left: -48px;
+            top: 0;
+            width: 36px;
+            height: 36px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            transition: var(--transition-medium);
+        }
+        
+        .timeline-item:hover .timeline-icon {
+            transform: scale(1.2) rotate(15deg);
+            background: var(--primary);
+        }
+        
+        .timeline-content h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+        
+        .timeline-content p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+        }
+        
+        /* Mobile Download Card */
+        .mobile-card {
+            margin-top: 60px;
+            background: rgba(255, 215, 0, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 30px;
+            transition: var(--transition-medium);
+        }
+        
+        .mobile-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.2);
+        }
+        
+        .mobile-text {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .mobile-text h3 {
+            color: var(--accent);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .mobile-text p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+        }
+        
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: var(--accent);
+            color: var(--dark);
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition-medium);
+            margin-top: 20px;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+            background: var(--accent-dark);
         }
         
         /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 2.5rem;
+        @media (max-width: 1024px) {
+            .section {
+                padding: 40px 30px;
             }
             
-            .section {
-                padding: 30px 20px;
+            .hero-banner {
+                height: 450px;
             }
             
             .progress-container {
-                width: 90%;
+                width: 85%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .section {
+                padding: 35px 25px;
+                border-radius: 15px;
+            }
+            
+            .hero-banner {
+                height: 400px;
+                margin-bottom: 40px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            
+            .features, .services-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .about-content, .contact-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .about-image {
+                height: 350px;
+            }
+            
+            .menu-toggle {
+                width: 55px;
+                height: 55px;
+                top: 20px;
+                right: 20px;
+            }
+            
+            #sidebarMenu {
+                width: 280px;
+                padding: 90px 25px 25px;
+            }
+            
+            .progress-container {
+                padding: 30px;
             }
         }
         
         @media (max-width: 480px) {
+            .section {
+                padding: 30px 20px;
+            }
+            
+            .hero-banner {
+                height: 350px;
+            }
+            
             .hero-content h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+            }
+            
+            .game-button, .submit-btn {
+                padding: 15px 30px;
+                font-size: 0.95rem;
             }
             
             .menu-toggle {
@@ -599,109 +1146,59 @@
             #sidebarMenu {
                 width: 250px;
             }
+            
+            .mobile-card {
+                padding: 30px;
+            }
+            
+            .download-btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
         }
         
-        /* Particle Background */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
+        /* Parallax Scrolling Effect */
+        .parallax {
+            transform-style: preserve-3d;
+            will-change: transform;
         }
         
-        .particle {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.5;
-            animation: float linear infinite;
+        /* Smooth State Transitions */
+        .state-transition {
+            transition: var(--transition-slow);
+            will-change: opacity, transform;
         }
         
-        @keyframes float {
-            0% { transform: translateY(0) translateX(0); opacity: 0; }
-            10% { opacity: 0.5; }
-            100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
+        /* GPU Accelerated Elements */
+        .gpu-accelerate {
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000px;
         }
         
-        /* Scroll Indicator */
-        .scroll-indicator {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--accent);
-            font-size: 1.5rem;
-            animation: bounce 2s infinite;
-            cursor: pointer;
-            z-index: 100;
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
+        /* Performance Optimized Animations */
+        @keyframes optimizedFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         
-        .scroll-indicator:hover {
-            opacity: 1;
+        /* Touch Feedback for Mobile */
+        button, a, .clickable {
+            -webkit-tap-highlight-color: transparent;
         }
         
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
-            40% { transform: translateY(-20px) translateX(-50%); }
-            60% { transform: translateY(-10px) translateX(-50%); }
-        }
-        
-        /* Game Button */
-        .game-button {
-            display: inline-block;
-            padding: 15px 40px;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            color: white;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 20px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .game-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-        }
-        
-        .game-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: all 0.5s ease;
-        }
-        
-        .game-button:hover::before {
-            left: 100%;
-        }
-        
-        /* Floating Stars */
-        .floating-star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle 3s infinite ease-in-out;
-            opacity: 0;
-        }
-        
-        @keyframes twinkle {
-            0% { opacity: 0; transform: scale(0.5); }
-            50% { opacity: 1; transform: scale(1); }
-            100% { opacity: 0; transform: scale(0.5); }
+        /* Reduced Motion Preference */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
         }
     </style>
 </head>
@@ -742,11 +1239,13 @@
     <main id="mainContent">
         <!-- Home Section -->
         <section id="home" class="section active">
-            <div class="hero-banner">
+            <div class="hero-banner parallax">
                 <div class="hero-content">
                     <h1>MOBE SPACE JOURNEY</h1>
                     <p>Embark on an epic galactic adventure with stunning visuals, intense battles, and endless exploration.</p>
-                    <a href="#" class="game-button" id="redirectButton">Launch Game</a>
+                    <button class="game-button" id="redirectButton">
+                        <i class="fas fa-rocket"></i> Launch Game
+                    </button>
                 </div>
             </div>
             
@@ -754,7 +1253,7 @@
             <p class="section-description">MOBE SPACE JOURNEY offers an unparalleled gaming experience with cutting-edge technology and immersive gameplay.</p>
             
             <div class="features">
-                <div class="feature-card">
+                <div class="feature-card gpu-accelerate">
                     <div class="feature-icon">
                         <i class="fas fa-globe"></i>
                     </div>
@@ -762,7 +1261,7 @@
                     <p>Explore vast galaxies with procedurally generated planets, each with unique ecosystems and challenges.</p>
                 </div>
                 
-                <div class="feature-card">
+                <div class="feature-card gpu-accelerate">
                     <div class="feature-icon">
                         <i class="fas fa-users"></i>
                     </div>
@@ -770,7 +1269,7 @@
                     <p>Team up with friends or compete against players worldwide in massive space battles.</p>
                 </div>
                 
-                <div class="feature-card">
+                <div class="feature-card gpu-accelerate">
                     <div class="feature-icon">
                         <i class="fas fa-ship"></i>
                     </div>
@@ -778,7 +1277,7 @@
                     <p>Design and upgrade your spacecraft with hundreds of modular components and paint schemes.</p>
                 </div>
                 
-                <div class="feature-card">
+                <div class="feature-card gpu-accelerate">
                     <div class="feature-icon">
                         <i class="fas fa-medal"></i>
                     </div>
@@ -787,8 +1286,8 @@
                 </div>
             </div>
             
-            <div class="video-container" style="margin-top: 60px; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);">
-                <video autoplay loop muted style="width: 100%; display: block;">
+            <div class="video-container gpu-accelerate">
+                <video autoplay loop muted playsinline>
                     <source src="e.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -809,42 +1308,47 @@
                     <p>With over 1 million active explorers, our community is at the heart of everything we do. Player feedback directly shapes the evolution of the MOBE universe.</p>
                 </div>
                 
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1454789548928-9efd52dc4031?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="MOBE Space Journey">
+                <div class="about-image gpu-accelerate">
+                    <img src="https://images.unsplash.com/photo-1454789548928-9efd52dc4031?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="MOBE Space Journey" loading="lazy">
                 </div>
             </div>
             
-            <div style="margin-top: 60px; background: rgba(255, 255, 255, 0.05); padding: 30px; border-radius: 15px; border-left: 5px solid var(--accent);">
-                <h3>Development Timeline</h3>
-                <div style="margin-top: 20px; position: relative; padding-left: 30px; border-left: 2px solid var(--primary);">
-                    <div style="position: relative; margin-bottom: 40px;">
-                        <div style="position: absolute; left: -36px; top: 0; width: 30px; height: 30px; background: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                            <i class="fas fa-rocket" style="color: white; font-size: 12px;"></i>
-                        </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="timeline-content">
                         <h4>2018 - Concept</h4>
                         <p>Initial ideas and prototype development began with a small team of 5 developers.</p>
                     </div>
-                    
-                    <div style="position: relative; margin-bottom: 40px;">
-                        <div style="position: absolute; left: -36px; top: 0; width: 30px; height: 30px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                            <i class="fas fa-code" style="color: white; font-size: 12px;"></i>
-                        </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="timeline-content">
                         <h4>2019 - Alpha</h4>
                         <p>First playable version released to select testers. Core gameplay mechanics established.</p>
                     </div>
-                    
-                    <div style="position: relative; margin-bottom: 40px;">
-                        <div style="position: absolute; left: -36px; top: 0; width: 30px; height: 30px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                            <i class="fas fa-users" style="color: var(--dark); font-size: 12px;"></i>
-                        </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="timeline-content">
                         <h4>2020 - Beta</h4>
                         <p>Public beta launched with 50,000 active players. Major systems refined based on feedback.</p>
                     </div>
-                    
-                    <div style="position: relative;">
-                        <div style="position: absolute; left: -36px; top: 0; width: 30px; height: 30px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                            <i class="fas fa-star" style="color: var(--primary); font-size: 12px;"></i>
-                        </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="timeline-content">
                         <h4>2021 - Launch</h4>
                         <p>Full version released worldwide to critical acclaim. Over 1 million players in first month.</p>
                     </div>
@@ -858,9 +1362,9 @@
             <p class="section-description">We offer a complete ecosystem of services to enhance your MOBE experience.</p>
             
             <div class="services-grid">
-                <div class="service-card">
+                <div class="service-card gpu-accelerate">
                     <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Game Hosting">
+                        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Game Hosting" loading="lazy">
                     </div>
                     <div class="service-content">
                         <h3>Dedicated Servers</h3>
@@ -868,9 +1372,9 @@
                     </div>
                 </div>
                 
-                <div class="service-card">
+                <div class="service-card gpu-accelerate">
                     <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1551103782-8ab07afd45c1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Marketplace">
+                        <img src="https://images.unsplash.com/photo-1551103782-8ab07afd45c1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Marketplace" loading="lazy">
                     </div>
                     <div class="service-content">
                         <h3>Galactic Marketplace</h3>
@@ -878,9 +1382,9 @@
                     </div>
                 </div>
                 
-                <div class="service-card">
+                <div class="service-card gpu-accelerate">
                     <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Tournaments">
+                        <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Tournaments" loading="lazy">
                     </div>
                     <div class="service-content">
                         <h3>Tournaments</h3>
@@ -888,9 +1392,9 @@
                     </div>
                 </div>
                 
-                <div class="service-card">
+                <div class="service-card gpu-accelerate">
                     <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1589254065878-42c9da997008?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Modding">
+                        <img src="https://images.unsplash.com/photo-1589254065878-42c9da997008?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Modding" loading="lazy">
                     </div>
                     <div class="service-content">
                         <h3>Modding Support</h3>
@@ -898,9 +1402,9 @@
                     </div>
                 </div>
                 
-                <div class="service-card">
+                <div class="service-card gpu-accelerate">
                     <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1551033406-611cf9a28f67?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Cloud">
+                        <img src="https://images.unsplash.com/photo-1551033406-611cf9a28f67?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Cloud" loading="lazy">
                     </div>
                     <div class="service-content">
                         <h3>Cloud Saves</h3>
@@ -908,28 +1412,28 @@
                     </div>
                 </div>
                 
-                <a href="https://discord.gg/6VYVsf87AF" style="text-decoration: none;">
-                    <div class="service-card">
-                        <div class="service-image">
-                            <img src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Community">
-                        </div>
-                        <div class="service-content">
-                            <h3>Community Hub</h3>
-                            <p>Join our vibrant Discord community to connect with other players and get the latest updates.</p>
-                            <div style="margin-top: 15px; color: var(--accent);">
-                                <i class="fab fa-discord"></i> Click to Join
-                            </div>
+                <a href="https://discord.gg/6VYVsf87AF" class="service-card gpu-accelerate" style="text-decoration: none;">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Community" loading="lazy">
+                    </div>
+                    <div class="service-content">
+                        <h3>Community Hub</h3>
+                        <p>Join our vibrant Discord community to connect with other players and get the latest updates.</p>
+                        <div style="margin-top: 15px; color: var(--accent);">
+                            <i class="fab fa-discord"></i> Click to Join
                         </div>
                     </div>
                 </a>
             </div>
             
-            <div style="margin-top: 60px; background: rgba(255, 215, 0, 0.1); padding: 30px; border-radius: 15px; border: 1px solid rgba(255, 215, 0, 0.3);">
-                <h3 style="color: var(--accent);">Mobile Version Available</h3>
-                <p style="margin-top: 15px;">Take MOBE with you wherever you go with our fully-featured mobile app.</p>
-                <a href="MOBE_GAME.apk" download style="display: inline-block; margin-top: 20px; padding: 12px 25px; background: var(--accent); color: var(--dark); border-radius: 30px; font-weight: bold; text-decoration: none; transition: all 0.3s ease;">
-                    <i class="fab fa-android"></i> Download for Android
-                </a>
+            <div class="mobile-card gpu-accelerate">
+                <div class="mobile-text">
+                    <h3>Mobile Version Available</h3>
+                    <p>Take MOBE with you wherever you go with our fully-featured mobile app.</p>
+                    <a href="MOBE_GAME.apk" class="download-btn" download>
+                        <i class="fab fa-android"></i> Download for Android
+                    </a>
+                </div>
             </div>
         </section>
         
@@ -941,19 +1445,19 @@
             <div class="contact-container">
                 <div class="contact-info">
                     <h3>Contact Information</h3>
-                    <p style="margin-top: 20px;">
-                        <i class="fas fa-envelope" style="color: var(--accent); margin-right: 10px;"></i>
+                    <p>
+                        <i class="fas fa-envelope"></i>
                         info@mobe.work.gd
                     </p>
                     
-                    <p style="margin-top: 15px;">
-                        <i class="fas fa-phone" style="color: var(--accent); margin-right: 10px;"></i>
+                    <p>
+                        <i class="fas fa-phone"></i>
                         +(880)1328716661
                     </p>
                     
-                    <p style="margin-top: 15px;">
-                        <i class="fas fa-map-marker-alt" style="color: var(--accent); margin-right: 10px;"></i>
-                        Dinajpur,Bangladesh
+                    <p>
+                        <i class="fas fa-map-marker-alt"></i>
+                        Dinajpur, Bangladesh
                     </p>
                     
                     <div class="social-links">
@@ -961,23 +1465,23 @@
                             <i class="fab fa-discord"></i>
                         </a>
                         
-                        <a href="MOBE_GAME.apk" class="social-link android"download>
+                        <a href="MOBE_GAME.apk" class="social-link android" download>
                             <i class="fab fa-android"></i>
                         </a>
                         
-                                                <a href="https://www.youtube.com/@lgadminvai" class="social-link youtube">
+                        <a href="https://www.youtube.com/@lgadminvai" class="social-link youtube">
                             <i class="fab fa-youtube"></i>
                         </a>
-                        
+                    </div>
                     
                     <div style="margin-top: 40px;">
                         <h3>Support Hours</h3>
-                        <p style="margin-top: 10px;">
-                            <i class="fas fa-clock" style="color: var(--accent); margin-right: 10px;"></i>
-                           Friday: 9AM - 6PM GMT
+                        <p>
+                            <i class="fas fa-clock"></i>
+                            Friday: 9AM - 6PM GMT
                         </p>
-                        <p style="margin-top: 5px;">
-                            <i class="fas fa-clock" style="color: var(--accent); margin-right: 10px;"></i>
+                        <p>
+                            <i class="fas fa-clock"></i>
                             Friday: 10AM - 4PM GMT
                         </p>
                     </div>
@@ -985,7 +1489,7 @@
                 
                 <div class="contact-form">
                     <h3>Send Us a Message</h3>
-                    <form id="contactForm" style="margin-top: 20px;">
+                    <form id="contactForm">
                         <div class="form-group">
                             <label for="name">Your Name</label>
                             <input type="text" id="name" name="name" required>
@@ -1006,7 +1510,9 @@
                             <textarea id="message" name="message" required></textarea>
                         </div>
                         
-                        <button type="submit" class="submit-btn">Send Message</button>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
                     </form>
                 </div>
             </div>
@@ -1024,7 +1530,7 @@
     
     <!-- Progress Overlay -->
     <div class="progress-overlay" id="progressOverlay">
-        <div class="progress-container">
+        <div class="progress-container gpu-accelerate">
             <h3 class="progress-title">LAUNCHING MOBE SPACE JOURNEY</h3>
             <div class="progress-bar-container">
                 <div class="progress-bar" id="progressBar"></div>
@@ -1035,173 +1541,208 @@
     </div>
     
     <!-- Footer -->
-    <footer>
+    <footer class="gpu-accelerate">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#" class="footer-link">Privacy Policy</a>
+                <a href="#" class="footer-link">Terms of Service</a>
+                <a href="#" class="footer-link">FAQ</a>
+                <a href="#" class="footer-link">Support</a>
+            </div>
             <p class="copyright">&copy; 2024 MOBE SPACE JOURNEY. All Rights Reserved.</p>
         </div>
     </footer>
     
     <script>
-        // Menu Toggle Functionality
-        const menuToggle = document.getElementById('menuToggle');
-        const menuIcon = document.getElementById('menuIcon');
-        const sidebarMenu = document.getElementById('sidebarMenu');
-        const mainContent = document.getElementById('mainContent');
-        
-        menuToggle.addEventListener('click', () => {
-            sidebarMenu.classList.toggle('active');
-            mainContent.classList.toggle('blur');
-            menuIcon.textContent = sidebarMenu.classList.contains('active') ? '×' : '≡';
-        });
-        
-        // Section Switching
-        const sections = document.querySelectorAll('.section');
-        const menuItems = document.querySelectorAll('#sidebarMenu ul li');
-        
-        menuItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const target = item.getAttribute('data-section');
-                
-                // Hide all sections
-                sections.forEach(section => {
-                    section.classList.remove('active');
-                });
-                
-                // Show target section
-                if (target) {
-                    document.getElementById(target).classList.add('active');
-                }
-                
-                // Close menu
-                sidebarMenu.classList.remove('active');
-                mainContent.classList.remove('blur');
-                menuIcon.textContent = '≡';
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Menu Toggle Functionality
+            const menuToggle = document.getElementById('menuToggle');
+            const menuIcon = document.getElementById('menuIcon');
+            const sidebarMenu = document.getElementById('sidebarMenu');
+            const mainContent = document.getElementById('mainContent');
+            
+            menuToggle.addEventListener('click', () => {
+                sidebarMenu.classList.toggle('active');
+                mainContent.classList.toggle('blur');
+                menuIcon.textContent = sidebarMenu.classList.contains('active') ? '×' : '≡';
             });
-        });
-        
-        // Game Redirect Button
-        const redirectButton = document.getElementById('redirectButton');
-        const gameRedirect = document.getElementById('gameRedirect');
-        const progressOverlay = document.getElementById('progressOverlay');
-        const progressBar = document.getElementById('progressBar');
-        const progressNumber = document.getElementById('progressNumber');
-        
-        function startGameRedirect() {
-            // Show progress overlay
-            progressOverlay.classList.add('active');
             
-            let progress = 0;
-            const interval = setInterval(() => {
-                if (progress >= 100) {
-                    clearInterval(interval);
-                    setTimeout(() => {
-                        window.location.href = 'https://roy9957.github.io/MOBE-GAME/';
-                    }, 500);
-                } else {
-                    progress++;
-                    progressBar.style.width = `${progress}%`;
-                    progressNumber.textContent = `${progress}%`;
+            // Section Switching
+            const sections = document.querySelectorAll('.section');
+            const menuItems = document.querySelectorAll('#sidebarMenu ul li');
+            
+            menuItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const target = item.getAttribute('data-section');
                     
-                    // Add some random fluctuation to make it feel more natural
-                    if (progress > 90 && Math.random() > 0.7) {
-                        progress -= 2;
+                    // Hide all sections with smooth transition
+                    sections.forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    
+                    // Show target section
+                    if (target) {
+                        document.getElementById(target).classList.add('active');
                     }
-                }
-            }, 30);
-        }
-        
-        redirectButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            startGameRedirect();
-        });
-        
-        gameRedirect.addEventListener('click', (e) => {
-            e.preventDefault();
-            startGameRedirect();
-        });
-        
-        // Contact Form Submission
-        const contactForm = document.getElementById('contactForm');
-        
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+                    
+                    // Close menu
+                    sidebarMenu.classList.remove('active');
+                    mainContent.classList.remove('blur');
+                    menuIcon.textContent = '≡';
+                });
+            });
             
-            // Get form values
-            const formData = new FormData(contactForm);
-            const formValues = Object.fromEntries(formData.entries());
+            // Game Redirect Button
+            const redirectButton = document.getElementById('redirectButton');
+            const gameRedirect = document.getElementById('gameRedirect');
+            const progressOverlay = document.getElementById('progressOverlay');
+            const progressBar = document.getElementById('progressBar');
+            const progressNumber = document.getElementById('progressNumber');
             
-            // Here you would typically send the data to a server
-            console.log('Form submitted:', formValues);
+            function startGameRedirect() {
+                // Show progress overlay
+                progressOverlay.classList.add('active');
+                
+                let progress = 0;
+                const interval = setInterval(() => {
+                    if (progress >= 100) {
+                        clearInterval(interval);
+                        setTimeout(() => {
+                            window.location.href = 'https://roy9957.github.io/MOBE-GAME/';
+                        }, 500);
+                    } else {
+                        progress++;
+                        progressBar.style.width = `${progress}%`;
+                        progressNumber.textContent = `${progress}%`;
+                        
+                        // Add some random fluctuation to make it feel more natural
+                        if (progress > 90 && Math.random() > 0.7) {
+                            progress -= 2;
+                        }
+                    }
+                }, 30);
+            }
             
-            // Show success message
-            alert('Thank you for your message! We will get back to you soon.');
+            redirectButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                startGameRedirect();
+            });
             
-            // Reset form
-            contactForm.reset();
-        });
-        
-        // Create particle background
-        const particlesContainer = document.getElementById('particles');
-        
-        for (let i = 0; i < 100; i++) {
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
+            gameRedirect.addEventListener('click', (e) => {
+                e.preventDefault();
+                startGameRedirect();
+            });
             
-            // Random properties
-            const size = Math.random() * 3 + 1;
-            const posX = Math.random() * 100;
-            const posY = Math.random() * 100;
-            const duration = Math.random() * 20 + 10;
-            const delay = Math.random() * 10;
+            // Contact Form Submission
+            const contactForm = document.getElementById('contactForm');
             
-            particle.style.width = `${size}px`;
-            particle.style.height = `${size}px`;
-            particle.style.left = `${posX}%`;
-            particle.style.top = `${posY}%`;
-            particle.style.animationDuration = `${duration}s`;
-            particle.style.animationDelay = `${delay}s`;
-            
-            particlesContainer.appendChild(particle);
-        }
-        
-        // Create floating stars
-        const starsContainer = document.getElementById('floatingStars');
-        
-        for (let i = 0; i < 30; i++) {
-            const star = document.createElement('div');
-            star.classList.add('floating-star');
-            
-            // Random properties
-            const size = Math.random() * 4 + 1;
-            const posX = Math.random() * 100;
-            const posY = Math.random() * 100;
-            const duration = Math.random() * 5 + 3;
-            const delay = Math.random() * 5;
-            
-            star.style.width = `${size}px`;
-            star.style.height = `${size}px`;
-            star.style.left = `${posX}%`;
-            star.style.top = `${posY}%`;
-            star.style.animationDuration = `${duration}s`;
-            star.style.animationDelay = `${delay}s`;
-            
-            starsContainer.appendChild(star);
-        }
-        
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+            contactForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
+                // Get form values
+                const formData = new FormData(contactForm);
+                const formValues = Object.fromEntries(formData.entries());
                 
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
+                // Here you would typically send the data to a server
+                console.log('Form submitted:', formValues);
+                
+                // Show success message
+                alert('Thank you for your message! We will get back to you soon.');
+                
+                // Reset form
+                contactForm.reset();
             });
+            
+            // Create particle background
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = window.innerWidth < 768 ? 50 : 100;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random properties
+                const size = Math.random() * 3 + 1;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const duration = Math.random() * 20 + 10;
+                const delay = Math.random() * 10;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+            
+            // Create floating stars
+            const starsContainer = document.getElementById('floatingStars');
+            const starCount = window.innerWidth < 768 ? 15 : 30;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('floating-star');
+                
+                // Random properties
+                const size = Math.random() * 4 + 1;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const duration = Math.random() * 5 + 3;
+                const delay = Math.random() * 5;
+                
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${posX}%`;
+                star.style.top = `${posY}%`;
+                star.style.animationDuration = `${duration}s`;
+                star.style.animationDelay = `${delay}s`;
+                
+                starsContainer.appendChild(star);
+            }
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Add intersection observer for smooth animations
+            const observerOptions = {
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all sections
+            document.querySelectorAll('.section').forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Optimize animations for mobile
+            if ('ontouchstart' in window) {
+                document.body.classList.add('touch-device');
+            }
         });
     </script>
 </body>
