@@ -1,0 +1,217 @@
+<!DOCTYPE html><html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Privacy Policy — Messenger Bot</title>
+  <meta name="description" content="Privacy Policy for Ronobir's Facebook Messenger Bot." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0f14;           /* deep dark */
+      --panel:#111827;        /* card */
+      --panel-2:#0f172a;      /* alt */
+      --text:#e5e7eb;         /* light */
+      --muted:#9ca3af;        /* muted */
+      --neon:#00e7ff;         /* cyan neon */
+      --neon-2:#8a2be2;       /* electric purple */
+      --ok:#22c55e;           /* green */
+      --warn:#f59e0b;         /* amber */
+      --danger:#ef4444;       /* red */
+      --radius:18px;
+      --shadow:0 10px 30px rgba(0,0,0,.35), 0 0 40px rgba(0,231,255,.08);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Poppins, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1000px 700px at 85% -10%, rgba(138,43,226,.18), transparent),
+                  radial-gradient(900px 600px at -10% 20%, rgba(0,231,255,.18), transparent),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+    .container{max-width:1100px; margin:0 auto; padding:24px;}/* Header */
+header{
+  position:sticky; top:0; z-index:40; backdrop-filter:saturate(150%) blur(8px);
+  background:linear-gradient(180deg, rgba(11,15,20,.9), rgba(11,15,20,.65));
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.nav{display:flex; align-items:center; justify-content:space-between; gap:16px;}
+.brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--text)}
+.logo{
+  width:40px; height:40px; border-radius:12px; background:linear-gradient(135deg, var(--neon), var(--neon-2));
+  box-shadow:0 0 22px rgba(0,231,255,.45), inset 0 0 18px rgba(255,255,255,.15);
+}
+.brand h1{font-size:18px; margin:0; font-weight:600; letter-spacing:.5px}
+.nav .cta{
+  display:inline-flex; align-items:center; gap:10px; padding:10px 16px; border-radius:999px;
+  border:1px solid rgba(255,255,255,.12);
+  background:linear-gradient(135deg, rgba(17,24,39,.8), rgba(17,24,39,.45));
+  color:var(--text); text-decoration:none; font-weight:600; box-shadow:var(--shadow);
+}
+.cta:hover{transform:translateY(-1px); box-shadow:0 16px 34px rgba(0,231,255,.15)}
+
+/* Hero */
+.hero{display:grid; grid-template-columns:1.2fr .8fr; gap:28px; align-items:center; padding:32px 0 10px}
+.card{
+  background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.08); border-radius:var(--radius); padding:28px; box-shadow:var(--shadow);
+}
+.badge{display:inline-block; padding:6px 10px; border-radius:999px; font-size:12px; letter-spacing:.3px;
+  color:#0d1420; font-weight:700; background:linear-gradient(135deg, var(--neon), var(--neon-2));
+  box-shadow:0 6px 24px rgba(0,231,255,.25)}
+h2{margin:14px 0 8px; font-size:30px; line-height:1.25}
+p.lead{color:var(--muted); margin:0 0 10px}
+.meta{display:flex; gap:14px; flex-wrap:wrap; font-size:13px; color:var(--muted)}
+
+.spark{
+  height:240px; border-radius:var(--radius); background:
+    linear-gradient(135deg, rgba(0,231,255,.15), rgba(138,43,226,.15)),
+    radial-gradient(650px 150px at 10% 20%, rgba(0,231,255,.35), transparent),
+    radial-gradient(650px 150px at 90% 60%, rgba(138,43,226,.35), transparent),
+    var(--panel-2);
+  border:1px solid rgba(255,255,255,.08);
+  position:relative; overflow:hidden; box-shadow:var(--shadow);
+}
+.spark::after{
+  content:""; position:absolute; inset:-60px; background:conic-gradient(from 180deg at 50% 50%, rgba(0,231,255,.25), transparent 30%, rgba(138,43,226,.25), transparent 60%);
+  filter:blur(30px); opacity:.6; animation:spin 14s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Section */
+section{margin:26px 0}
+.grid{display:grid; grid-template-columns:repeat(2,1fr); gap:18px}
+.section-title{font-size:20px; margin:0 0 12px; font-weight:600}
+.list{margin:0; padding-left:18px; color:var(--muted)}
+
+.kvs{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:10px}
+.kv{background:var(--panel); border:1px solid rgba(255,255,255,.08); border-radius:14px; padding:14px}
+.kv small{display:block; color:var(--muted)}
+
+/* Footer */
+footer{margin:34px 0 8px; color:var(--muted); font-size:13px}
+.btns{display:flex; gap:10px; flex-wrap:wrap}
+.btn{
+  padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.12);
+  text-decoration:none; color:var(--text); background:linear-gradient(135deg, rgba(17,24,39,.9), rgba(17,24,39,.5));
+}
+.btn:hover{border-color:rgba(0,231,255,.5)}
+
+/* Responsive */
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;}
+  .grid{grid-template-columns:1fr}
+  .kvs{grid-template-columns:1fr}
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#">
+        <div class="logo" aria-hidden="true"></div>
+        <h1>Ronobir — Messenger Bot</h1>
+      </a>
+      <a class="cta" href="#contact">Contact</a>
+    </div>
+  </header>  <main class="container">
+    <div class="hero">
+      <div class="card">
+        <span class="badge">Privacy Policy</span>
+        <h2>Facebook Messenger Bot — Privacy & Data Notice</h2>
+        <p class="lead">আমরা আপনার প্রাইভেসি রক্ষা করতে অঙ্গীকারবদ্ধ। এই পেজে ব্যাখ্যা করা হয়েছে এই Messenger bot কী ডাটা সংগ্রহ করে, কিভাবে ব্যবহার করে এবং আপনার অধিকার কী।</p>
+        <div class="meta">
+          <div>Last updated: <strong>August 27, 2025</strong></div>
+          <div>Controller: <strong>Ronobir</strong></div>
+        </div>
+      </div>
+      <div class="spark" role="img" aria-label="Neon abstract background"></div>
+    </div><section class="card">
+  <h3 class="section-title">১) আমরা কী ডাটা পাই</h3>
+  <div class="grid">
+    <div>
+      <ul class="list">
+        <li>আপনি Messenger-এ যে মেসেজ পাঠান (টেক্সট ও attachments-এর মেটাডেটা)</li>
+        <li>আপনার public profile তথ্য (নাম, প্রোফাইল আইডি) যা Facebook API অনুমতি দেয়</li>
+        <li>টেকনিক্যাল লগ (টাইমস্ট্যাম্প, ডেলিভারি স্ট্যাটাস, এরর)</li>
+      </ul>
+    </div>
+    <div>
+      <div class="kvs">
+        <div class="kv"><small>Legal basis</small><strong>Legitimate Interest</strong></div>
+        <div class="kv"><small>Age limit</small><strong>13+</strong></div>
+        <div class="kv"><small>Scope</small><strong>Messenger only</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <h3 class="section-title">২) আমরা কীভাবে ডাটা ব্যবহার করি</h3>
+  <ul class="list">
+    <li>আপনার প্রশ্ন বুঝে reply ও automation দিতে</li>
+    <li>Bot-এর performance উন্নত করতে (error monitoring, abuse prevention)</li>
+    <li>Optional: সাপোর্ট/কমিউনিকেশন (আপনি ইচ্ছা করলে)</li>
+  </ul>
+</section>
+
+<section class="card">
+  <h3 class="section-title">৩) ডাটা শেয়ারিং</h3>
+  <p class="lead">আমরা কোনো থার্ড-পার্টির সাথে আপনার ব্যক্তিগত ডাটা বিক্রি করি না। প্রয়োজন হলে কেবল:</p>
+  <ul class="list">
+    <li>আইনগত বাধ্যবাধকতা</li>
+    <li>প্লাটফর্ম সিকিউরিটি (Facebook/Meta নীতিমালা মেনে চলা)</li>
+    <li>হোস্টিং/ইনফ্রা প্রোভাইডার (শুধু প্রসেসিংয়ের জন্য)</li>
+  </ul>
+</section>
+
+<section class="card">
+  <h3 class="section-title">৪) রিটেনশন (ডাটা কতদিন রাখা হয়)</h3>
+  <p class="lead">Conversation logs সাধারণত <strong>৩০–৯০ দিন</strong> পর্যন্ত রাখা হতে পারে debugging/abuse-prevention এর জন্য; প্রয়োজনে sooner delete করা হবে।</p>
+</section>
+
+<section class="card">
+  <h3 class="section-title">৫) আপনার অধিকার</h3>
+  <ul class="list">
+    <li>Access: আপনার ডাটা সম্পর্কে জানার অধিকার</li>
+    <li>Correction & Deletion: ভুল/অপ্রয়োজনীয় ডাটা ঠিক বা মুছে দেওয়ার অনুরোধ</li>
+    <li>Opt-out: Promotional/optional message থেকে opt-out</li>
+  </ul>
+</section>
+
+<section id="contact" class="card">
+  <h3 class="section-title">৬) যোগাযোগ</h3>
+  <p class="lead">যেকোনো প্রশ্ন, অভিযোগ বা ডাটা-সংক্রান্ত অনুরোধের জন্য যোগাযোগ করুন:</p>
+  <div class="kvs">
+    <div class="kv"><small>Email</small><strong><a href="mailto:songtube@protonmail.com">songtube@protonmail.com</a></strong></div>
+    <div class="kv"><small>Alt Email</small><strong><a href="mailto:ranobirroy566@gmail.com">ranobirroy566@gmail.com</a></strong></div>
+    <div class="kv"><small>Scope</small><strong>Facebook Messenger Bot</strong></div>
+  </div>
+</section>
+
+<section class="card">
+  <h3 class="section-title">৭) শিশুদের প্রাইভেসি</h3>
+  <p class="lead">এই সেবা ১৩ বছরের কম বয়সী শিশুদের জন্য নয়। যদি ভুলবশত এমন ডাটা পাই, দ্রুত মুছে ফেলা হবে।</p>
+</section>
+
+<section class="card">
+  <h3 class="section-title">৮) আপডেট</h3>
+  <p class="lead">এই নীতিমালা সময়ে সময়ে আপডেট হতে পারে। “Last updated” তারিখ পরিবর্তনের মাধ্যমে আমরা ইঙ্গিত করবো। গুরুত্বপূর্ণ পরিবর্তনের ক্ষেত্রে যুক্তিসঙ্গতভাবে নোটিশ দেওয়া হবে।</p>
+</section>
+
+<footer class="container">
+  <div class="btns">
+    <a class="btn" href="#top">↑ Back to top</a>
+    <a class="btn" href="mailto:songtube@protonmail.com?subject=Privacy%20Request%20(Messenger%20Bot)">Request my data</a>
+  </div>
+  <p style="margin-top:10px">© <span id="y"></span> Ronobir. All rights reserved.</p>
+</footer>
+
+  </main>  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script></body>
+</html>
